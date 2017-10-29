@@ -12,6 +12,7 @@ export default (state = INITIAL_STATE, action) => {
         case types.EMPLOYEE_UPDATE:
             return { ...state, [action.payload.prop]: action.payload.value };
         case types.EMPLOYEE_CREATE:
+        case types.EMPLOYEE_SAVE_SUCCESS:
             return INITIAL_STATE;
         default:
             return state;

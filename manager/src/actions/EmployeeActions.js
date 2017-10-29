@@ -29,7 +29,7 @@ export const employeesFetch = () => (dispatch) => {
     const { currentUser } = firebase.auth();
 
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
-            .on('value', snapshot => { // this will be called everytime new data comes in
+            .on('value', snapshot => { // this will be called everytime new data comes in, or on a save
                 dispatch({ type: types.EMPLOYEE_FETCH_SUCCESS, payload: snapshot.val() });
             });
 }
@@ -40,6 +40,7 @@ export const employeeSave = ({ name, phone, shift, uid }) => (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
             .set({ name, phone, shift })
             .then(() => {
+                dispatch({ type: types.EMPLOYEE_SAVE_SUCCESS });
                 Actions.employeeList({ type: 'reset' });
             });
 };
