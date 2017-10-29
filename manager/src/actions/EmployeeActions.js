@@ -33,3 +33,13 @@ export const employeesFetch = () => (dispatch) => {
                 dispatch({ type: types.EMPLOYEE_FETCH_SUCCESS, payload: snapshot.val() });
             });
 }
+
+export const employeeSave = ({ name, phone, shift, uid }) => (dispatch) => {
+    const { currentUser } = firebase.auth();
+
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .set({ name, phone, shift })
+            .then(() => {
+                Actions.employeeList({ type: 'reset' });
+            });
+};
