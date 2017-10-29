@@ -10,9 +10,9 @@ const Confirm = ({ visible, children, onAccept, onDecline }) => (
         transparent
         animationType="slide"
         onRequestClose={() => {}}>
-        <View>
-            <CardSection>
-                <Text>
+        <View style={styles.containerStyle}>
+            <CardSection style={styles.cardSectionStyle}>
+                <Text style={styles.textStyle}>
                     {children}
                 </Text>
             </CardSection>
@@ -29,7 +29,7 @@ const Confirm = ({ visible, children, onAccept, onDecline }) => (
 );
 
 const styles = {
-    cardSelectionStyle: {
+    cardSectionStyle: {
         justifyContent: 'center'
     },
     textStyle: {

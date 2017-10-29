@@ -36,7 +36,7 @@ export const employeesFetch = () => (dispatch) => {
 
 export const employeeSave = ({ name, phone, shift, uid }) => (dispatch) => {
     const { currentUser } = firebase.auth();
-
+    
     firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
             .set({ name, phone, shift })
             .then(() => {
@@ -44,3 +44,13 @@ export const employeeSave = ({ name, phone, shift, uid }) => (dispatch) => {
                 Actions.employeeList({ type: 'reset' });
             });
 };
+
+export const employeeDelete = ({ uid }) => () => {
+    const { currentUser } = firebase.auth();
+
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove()
+            .then(() => {
+                Actions.employeeList({ type: 'reset' });
+            });
+}
